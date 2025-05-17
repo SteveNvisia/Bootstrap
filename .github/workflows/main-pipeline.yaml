@@ -7,7 +7,7 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
-  build:
+  tofu_plan:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
@@ -25,3 +25,10 @@ jobs:
         run: |
           echo Add other actions to build,
           echo test, and deploy your project.
+  tofu_auto_aprove:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Run a one-line script
+        run: waiting to approve
