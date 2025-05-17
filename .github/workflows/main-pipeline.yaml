@@ -32,4 +32,4 @@ jobs:
       - tofu_plan
     steps:
       - name: Run a one-line script
-        run: waiting to approve
+        run: echo waiting for project
