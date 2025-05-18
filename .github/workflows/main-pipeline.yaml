@@ -36,7 +36,7 @@ jobs:
       id-token: 'write'
     
     env:
-      tf_destroy_flag: ${{ inputs.tf_operation == 'destroy' && '-destroy' || '' }}
+      tf_destroy_flag: ${{ inputs.tf_operations == 'destroy' && '-destroy' || '' }}
 
     runs-on: ubuntu-latest
 
@@ -65,7 +65,7 @@ jobs:
         run: tofu validate
       
       - name: Run a one-line script
-        run: echo ${{ inputs.tf_operation }} - ${{ github.event.inputs.tf_operation }}
+        run: echo ${{ inputs.tf_operations }} - ${{ github.event.inputs.tf_operations }}
 
       - name: OpenTofu Plan
         id: plan
@@ -86,7 +86,7 @@ jobs:
   manual_approval:
     needs:
       - tofu_plan
-    if:  inputs.tf_operation == 'apply' || inputs.tf_operation == 'destroy'
+    if: needs.tofu_plan.outputs.plan_exitcode == 2 && (inputs.tf_operations == 'apply' || inputs.tf_operations == 'destroy')
     runs-on: ubuntu-latest
     environment:
       name: approval
