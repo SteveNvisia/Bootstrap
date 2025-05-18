@@ -41,7 +41,7 @@ jobs:
     runs-on: ubuntu-latest
 
     outputs:
-      plan_exitcode: steps.plan.outputs.exitcode
+      plan_exitcode: ${{ steps.plan.outputs.exitcode }}
     steps:
       - uses: actions/checkout@v4
       - uses: opentofu/setup-opentofu@v1
