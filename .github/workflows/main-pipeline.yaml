@@ -12,6 +12,10 @@ jobs:
      pages: write
      id-token: 'write'
     
+    env:
+      TF_WORKSPACE: usncz
+      TF_VAR_TAG_AZDO_PROJECT_NAME: main
+    
     runs-on: ubuntu-latest
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
