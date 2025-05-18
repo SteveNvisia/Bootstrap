@@ -7,6 +7,11 @@ terraform {
       version = "6.35.0"
     }
   }
+
+  backend "gcs" {
+    bucket = "main-bucket-fs"
+    prefix = "state"
+  }
 }
 
 provider "google" {
