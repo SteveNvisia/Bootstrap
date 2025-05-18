@@ -61,21 +61,21 @@ jobs:
         id: Validate
         run: tofu validate
 
-      - name: Run a one-line script
-        run: echo "$tf_destroy_flag"
-
       - name: OpenTofu Plan
         id: plan
-        run: tofu plan -out terraform.tfplan -detailed-exitcode -input=false $tf_additional_command_options
+        run: tofu plan -out terraform.tfplan -detailed-exitcode -input=false $tf_destroy_flag $tf_additional_command_options
         env:
           TF_WORKSPACE: usncz
           TF_VAR_TAG_AZDO_PROJECT_NAME: main
+        
       
       - name: Run a one-line script
-        run: ls
-
-      - name: Run a one-line script
-        run: cat terraform.tfplan
+        run: echo "$TERRAFORM_PLAN_HAS_DESTROY_CHANGES - $TERRAFORM_PLAN_HAS_CHANGES" 
+      
+      - uses: actions/upload-artifact@v4
+        with:
+          name: tfplan
+          path: terraform.tfplan
   
   # manual_approval:
   #   runs-on: ubuntu-latest
