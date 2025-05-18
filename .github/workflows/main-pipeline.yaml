@@ -63,6 +63,9 @@ jobs:
       - name: OpenTofu Validate
         id: Validate
         run: tofu validate
+      
+      - name: Run a one-line script
+        run: echo ${{ inputs.tf_operation }} - ${{ github.event.inputs.tf_operation }}
 
       - name: OpenTofu Plan
         id: plan
