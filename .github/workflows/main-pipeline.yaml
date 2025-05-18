@@ -63,9 +63,6 @@ jobs:
       - name: OpenTofu Validate
         id: Validate
         run: tofu validate
-      
-      - name: Run a one-line script
-        run: echo ${{ inputs.tf_operations }} - ${{ github.event.inputs.tf_operations }}
 
       - name: OpenTofu Plan
         id: plan
@@ -73,9 +70,6 @@ jobs:
         env:
           TF_WORKSPACE: usncz
           TF_VAR_TAG_AZDO_PROJECT_NAME: main
-        
-      - name: Run a one-line script
-        run: echo ${{ steps.plan.outputs.exitcode }}
       
       - uses: actions/upload-artifact@v4
         with:
@@ -130,9 +124,6 @@ jobs:
       - uses: actions/download-artifact@v4
         with:
           name: tfplan
-
-      - name: Run a one-line script
-        run: ls
 
       - name: OpenTofu Apply
         id: apply
