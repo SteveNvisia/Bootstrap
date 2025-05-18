@@ -86,6 +86,10 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: approval
+    
+    steps:
+      - name: Run a one-line script
+        run: echo ${{ needs.tofu_plan.plan_exitcode }}
 
   # tofu_auto_aprove:
   #   runs-on: ubuntu-latest
