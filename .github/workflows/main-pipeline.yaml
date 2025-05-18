@@ -9,6 +9,7 @@ jobs:
   tofu_plan:
     permissions:
      contents: 'read'
+     pages: write
      id-token: 'write'
     
     runs-on: ubuntu-latest
