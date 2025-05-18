@@ -82,14 +82,14 @@ jobs:
   manual_approval:
     needs:
       - tofu_plan
-    if: needs.tofu_plan.plan_exitcode == 0
+    if: needs.tofu_plan.outputs.plan_exitcode == 0
     runs-on: ubuntu-latest
     environment:
       name: approval
     
     steps:
       - name: Run a one-line script
-        run: echo ${{ needs.tofu_plan.plan_exitcode }}
+        run: echo ${{ needs.tofu_plan.outputs.plan_exitcode }}
 
   # tofu_auto_aprove:
   #   runs-on: ubuntu-latest
