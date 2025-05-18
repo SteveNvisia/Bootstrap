@@ -31,9 +31,9 @@ jobs:
   # PLANING JOB
   tofu_plan:
     permissions:
-     contents: 'read'
-     pages: write
-     id-token: 'write'
+      contents: 'read'
+      pages: write
+      id-token: 'write'
     
     env:
       tf_destroy_flag: ${{ github.event.inputs.tf_operation == 'destroy' && '-destroy' || '' }}
@@ -95,9 +95,13 @@ jobs:
   # APPLYING JOBS
   tofu_auto_aprove:
     runs-on: ubuntu-latest
+    
+    permissions:
+      contents: 'read'
+      pages: write
+      id-token: 'write'
     needs: 
       - manual_approval
-
     steps:
       - uses: actions/checkout@v4
       - uses: opentofu/setup-opentofu@v1
