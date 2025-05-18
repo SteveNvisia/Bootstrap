@@ -131,9 +131,9 @@ jobs:
       - name: Run a one-line script
         run: ls
 
-      # - name: OpenTofu Apply
-      #   id: apply
-      #   run: tofu apply -input=false 
-      #   env:
-      #     TF_WORKSPACE: usncz
-      #     TF_VAR_TAG_AZDO_PROJECT_NAME: main
+      - name: OpenTofu Apply
+        id: apply
+        run: tofu apply -input=false terraform.tfplan
+        env:
+          TF_WORKSPACE: usncz
+          TF_VAR_TAG_AZDO_PROJECT_NAME: main
