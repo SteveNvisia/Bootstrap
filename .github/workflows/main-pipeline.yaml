@@ -53,6 +53,7 @@ jobs:
       - uses: trstringer/manual-approval@v1
         with:
           secret: any
+          approvers: SteveNvisia
 
   tofu_auto_aprove:
     runs-on: ubuntu-latest
