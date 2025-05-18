@@ -83,7 +83,7 @@ jobs:
   manual_approval:
     needs:
       - tofu_plan
-    if: needs.tofu_plan.outputs.plan_exitcode == 0
+    if: needs.tofu_plan.outputs.plan_exitcode == 2
     runs-on: ubuntu-latest
     environment:
       name: approval
