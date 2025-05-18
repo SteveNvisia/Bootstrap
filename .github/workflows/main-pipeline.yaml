@@ -13,6 +13,11 @@ jobs:
       - uses: actions/checkout@v4
       - uses: opentofu/setup-opentofu@v1
 
+      - uses: 'google-github-actions/auth@v2'
+        with:
+          project_id: 'My Project 60628'
+          workload_identity_provider: 'projects/481679777603/locations/global/workloadIdentityPools/github-account/providers/github'
+
       - name: OpenTofu fmt
         id: fmt
         run: tofu fmt -check
