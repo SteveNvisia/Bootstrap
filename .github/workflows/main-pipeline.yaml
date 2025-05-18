@@ -7,6 +7,10 @@ on:
 jobs:
   # This workflow contains a single job called "build"
   tofu_plan:
+    permissions:
+     contents: 'read'
+     id-token: 'write'
+    
     runs-on: ubuntu-latest
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
