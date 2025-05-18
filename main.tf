@@ -1,6 +1,6 @@
 resource "google_storage_bucket" "name" {
-  name          = "image-store.com"
-  location      = "EU"
+  name          = "terraform-bucket-creation"
+  location      = "us-east1"
   force_destroy = true
 }
 

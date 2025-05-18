@@ -28,7 +28,7 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
+  # PLANING JOB
   tofu_plan:
     permissions:
      contents: 'read'
@@ -79,10 +79,11 @@ jobs:
           name: tfplan
           path: terraform.tfplan
   
+  # APPROVAL
   manual_approval:
     needs:
       - tofu_plan
-    if: needs.tofu_plan.outputs.plan_exitcode == 2
+    if: needs.tofu_plan.outputs.plan_exitcode == 0
     runs-on: ubuntu-latest
     environment:
       name: approval
@@ -91,10 +92,40 @@ jobs:
       - name: Run a one-line script
         run: echo ${{ needs.tofu_plan.outputs.plan_exitcode }}
 
-  # tofu_auto_aprove:
-  #   runs-on: ubuntu-latest
-  #   needs: 
-  #     - manual_approval
-  #   steps:
-  #     - name: Run a one-line script
-  #       run: echo waiting for project
+  # APPLYING JOBS
+  tofu_auto_aprove:
+    runs-on: ubuntu-latest
+    needs: 
+      - manual_approval
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: opentofu/setup-opentofu@v1
+
+      - uses: 'google-github-actions/auth@v2'
+        with:
+          project_id: 'secure-way-460121-s4'
+          workload_identity_provider: 'projects/481679777603/locations/global/workloadIdentityPools/github-account/providers/github'
+      
+      - name: OpenTofu fmt
+        id: fmt
+        run: tofu fmt -check
+        continue-on-error: true
+
+      - name: OpenTofu init
+        id: init
+        run: tofu init
+      
+      - name: OpenTofu Validate
+        id: Validate
+        run: tofu validate
+
+      - name: Run a one-line script
+        run: ls
+
+      # - name: OpenTofu Apply
+      #   id: apply
+      #   run: tofu apply -input=false 
+      #   env:
+      #     TF_WORKSPACE: usncz
+      #     TF_VAR_TAG_AZDO_PROJECT_NAME: main
