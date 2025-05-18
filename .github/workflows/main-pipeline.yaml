@@ -51,6 +51,8 @@ jobs:
       - tofu_plan
     steps:
       - uses: trstringer/manual-approval@v1
+        with:
+          secret: any
 
   tofu_auto_aprove:
     runs-on: ubuntu-latest
