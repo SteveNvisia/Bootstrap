@@ -68,9 +68,8 @@ jobs:
           TF_WORKSPACE: usncz
           TF_VAR_TAG_AZDO_PROJECT_NAME: main
         
-      
       - name: Run a one-line script
-        run: echo "$TERRAFORM_PLAN_HAS_DESTROY_CHANGES - $TERRAFORM_PLAN_HAS_CHANGES" 
+        run: echo ${{ steps.plan.outputs.exitcode }}
       
       - uses: actions/upload-artifact@v4
         with:
