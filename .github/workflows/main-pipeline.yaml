@@ -59,7 +59,7 @@ jobs:
         run: tofu validate
 
       - name: Run a one-line script
-        run: echo "$env"
+        run: echo "$tf_destroy_flag"
 
       - name: OpenTofu Plan
         id: plan
