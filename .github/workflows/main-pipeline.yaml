@@ -124,6 +124,10 @@ jobs:
         id: Validate
         run: tofu validate
 
+      - uses: actions/download-artifact@v4
+        with:
+          name: tfplan
+
       - name: Run a one-line script
         run: ls
 
