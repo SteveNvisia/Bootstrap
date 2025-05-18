@@ -28,7 +28,7 @@ jobs:
 
       - name: OpenTofu Plan
         id: plan
-        run: tofu play
+        run: tofu plan
         continue-on-error: true
 
   tofu_auto_aprove:
