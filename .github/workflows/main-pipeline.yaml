@@ -66,16 +66,16 @@ jobs:
 
       - name: OpenTofu Plan
         id: plan
-        run: tofu plan -out ${{ github.action.path }}/${{ github.action.repository }}/terraform.tfplan -detailed-exitcode -input=false $tf_additional_command_options
+        run: tofu plan -out ${GITHUB_ACTION_PATH}/${GITHUB_REPOSITORY}/terraform.tfplan -detailed-exitcode -input=false $tf_additional_command_options
         env:
           TF_WORKSPACE: usncz
           TF_VAR_TAG_AZDO_PROJECT_NAME: main
       
       - name: Run a one-line script
-        run: ls ${{ github.action.path }}/${{ github.action.repository }}
+        run: ls ${GITHUB_ACTION_PATH}/${GITHUB_REPOSITORY}
 
       - name: Run a one-line script
-        run: cat ${{ github.action.path }}/${{ github.action.repository }}/terraform.tfplan
+        run: cat ${GITHUB_ACTION_PATH}/${GITHUB_REPOSITORY}/terraform.tfplan
   
   # manual_approval:
   #   runs-on: ubuntu-latest
