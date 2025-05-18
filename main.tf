@@ -3,3 +3,7 @@ resource "google_storage_bucket" "name" {
   location      = "EU"
   force_destroy = true
 }
+
+output "name" {
+  value = terraform.workspace
+}
