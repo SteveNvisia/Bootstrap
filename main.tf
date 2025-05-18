@@ -1,5 +1,5 @@
 resource "google_storage_bucket" "name" {
-  name          = "terraform-bucket-creation"
+  name          = "opentofu-bucket-creation-fs-12s3s"
   location      = "us-east1"
   force_destroy = true
 }
