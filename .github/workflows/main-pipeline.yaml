@@ -36,7 +36,7 @@ jobs:
       id-token: 'write'
     
     env:
-      tf_destroy_flag: ${{ github.event.inputs.tf_operation == 'destroy' && '-destroy' || '' }}
+      tf_destroy_flag: ${{ inputs.tf_operation == 'destroy' && '-destroy' || '' }}
 
     runs-on: ubuntu-latest
 
@@ -83,7 +83,7 @@ jobs:
   manual_approval:
     needs:
       - tofu_plan
-    if:  github.event.inputs.tf_operation == 'apply' || github.event.inputs.tf_operation == 'destroy'
+    if:  inputs.tf_operation == 'apply' || inputs.tf_operation == 'destroy'
     runs-on: ubuntu-latest
     environment:
       name: approval
