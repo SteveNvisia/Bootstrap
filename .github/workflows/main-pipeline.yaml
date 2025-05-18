@@ -39,6 +39,9 @@ jobs:
       tf_destroy_flag: ${{ github.event.inputs.tf_operation == 'destroy' && '-destroy' || '' }}
 
     runs-on: ubuntu-latest
+
+    outputs:
+      plan_exitcode: steps.plan.outputs.exitcode
     steps:
       - uses: actions/checkout@v4
       - uses: opentofu/setup-opentofu@v1
@@ -76,12 +79,13 @@ jobs:
           name: tfplan
           path: terraform.tfplan
   
-  # manual_approval:
-  #   runs-on: ubuntu-latest
-  #   needs:
-  #     - tofu_plan
-  #   environment:
-  #     name: approval
+  manual_approval:
+    needs:
+      - tofu_plan
+    if: needs.tofu_plan.plan_exitcode == 0
+    runs-on: ubuntu-latest
+    environment:
+      name: approval
 
   # tofu_auto_aprove:
   #   runs-on: ubuntu-latest
